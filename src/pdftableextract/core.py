@@ -32,11 +32,11 @@ def popen(name,command, *args, **kwargs):
     try:
         result=subprocess.Popen(command,*args, **kwargs)
         return result
-    except OSError, e:
+    except OSError as e:
         message="""Error running {0}. Is it installed correctly?
 Error: {1}""".format(name, e)
         raise OSError(message)
-    except Exception, e:
+    except Exception as e:
         raise 
 
 def colinterp(a,x) :
@@ -307,7 +307,7 @@ def process_page(infile, pgs,
 
   whitespace = re.compile( r'\s+')
    
-  def getCell( (i,j,u,v) ):
+  def getCell(i,j,u,v):
     (l,r,t,b) = ( vd[2*i+1] , vd[ 2*(i+u) ], hd[2*j+1], hd[2*(j+v)] )
     p = popen("pdftotext", 
               "pdftotext -r %d -x %d -y %d -W %d -H %d -layout -nopgbrk -f %d -l %d %s -" % (bitmap_resolution, l-pad, t-pad, r-l, b-t, pg, pg, quote(infile)),
@@ -329,7 +329,7 @@ def process_page(infile, pgs,
     #check that pdftotext exists by running a simple command
     check_for_required_executable("pdftotext",["pdftotext","-h"])
     #end check
-    cells = [ getCell(x)   for x in cells if 
+    cells = [ getCell(*x)   for x in cells if 
               ( frow == None or (x[1] >= frow and x[1] <= lrow)) ]
   return cells
 
@@ -404,7 +404,7 @@ def o_cells_xml(cells,pgs, outfile=None,infile=None, name=None, output_type=None
     root.setAttribute("name",name)
   for cl in cells :
     x = doc.createElement("cell")
-    map(lambda(a): x.setAttribute(*a), zip("xywhp",map(str,cl)))
+    map(lambda a: x.setAttribute(*a), zip("xywhp",map(str,cl)))
     if cl[5] != "" :
       x.appendChild( doc.createTextNode(cl[5]) )
     root.appendChild(x)

@@ -251,7 +251,7 @@ def process_page(pgs) :
 
   whitespace = re.compile( r'\s+')
    
-  def getCell( (i,j,u,v) ):
+  def getCell(i,j,u,v):
     (l,r,t,b) = ( vd[2*i+1] , vd[ 2*(i+u) ], hd[2*j+1], hd[2*(j+v)] )
     p = subprocess.Popen(
     ("pdftotext -r %d -x %d -y %d -W %d -H %d -layout -nopgbrk -f %d -l %d %s -"
@@ -269,13 +269,13 @@ def process_page(pgs) :
   #if args.boxes :
   #  cells = [ x + (pg,"",) for x in cells ]
   #else :
-  #  cells = map(getCell, cells)
+  #  cells = [getCell(*cell) for cell in cells]
   
   if args.boxes :
     cells = [ x + (pg,"",) for x in cells if 
               ( frow == None or (x[1] >= frow and x[1] <= lrow)) ]
   else :
-    cells = [ getCell(x)   for x in cells if 
+    cells = [ getCell(*x)   for x in cells if 
               ( frow == None or (x[1] >= frow and x[1] <= lrow)) ]
   return cells
 

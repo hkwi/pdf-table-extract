@@ -28,7 +28,7 @@ def readPNM(fd):
   m = int(m)
 
   if m != 255 :
-    print "Just want 8 bit pgms for now!"
+    print("Just want 8 bit pgms for now!")
   
   d = fromstring(data,dtype=uint8)
   d = reshape(d, (height,width) )
