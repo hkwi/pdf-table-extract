@@ -74,7 +74,7 @@ def process_page(infile, pgs,
     
   outfile = open(outfilename,'w') if outfilename else sys.stdout
   page=page or []
-  (pg,frow,lrow) = (map(int,(pgs.split(":")))+[None,None])[0:3]
+  (pg,frow,lrow) = (list(map(int,(pgs.split(":"))))+[None,None])[0:3]
   #check that pdftoppdm exists by running a simple command
   check_for_required_executable("pdftoppm",["pdftoppm","-h"])
   #end check
