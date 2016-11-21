@@ -305,7 +305,7 @@ def process_page(infile, pgs,
 #-----------------------------------------------------------------------
 # fork out to extract text for each cell.
 
-  whitespace = re.compile( r'\s+')
+  whitespaceRe = re.compile( r'\s+')
    
   def getCell(i,j,u,v):
     (l,r,t,b) = ( vd[2*i+1] , vd[ 2*(i+u) ], hd[2*j+1], hd[2*(j+v)] )
@@ -316,7 +316,7 @@ def process_page(infile, pgs,
     
     ret = p.communicate()[0]
     if whitespace != 'raw' :
-      ret = whitespace.sub( "" if whitespace == "none" else " ", ret )
+      ret = whitespaceRe.sub( "" if whitespace == "none" else " ", ret )
       if len(ret) > 0 :
         ret = ret[ (1 if ret[0]==' ' else 0) : 
                    len(ret) - (1 if ret[-1]==' ' else 0) ]
