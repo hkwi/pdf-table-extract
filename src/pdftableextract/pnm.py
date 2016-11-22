@@ -7,7 +7,7 @@ def noncomment(fd):
   Comments start with #"""
   while True:
     x = fd.readline() 
-    if x.startswith('#') :
+    if x.startswith(b'#') :
       continue
     else:
       return x
@@ -16,7 +16,7 @@ def readPNM(fd):
   """Reads the PNM file from the filehandle"""
   t = noncomment(fd)
   s = noncomment(fd)
-  m = noncomment(fd) if not (t.startswith('P1') or t.startswith('P4')) else '1'
+  m = noncomment(fd) if not (t.startswith(b'P1') or t.startswith(b'P4')) else '1'
   data = fd.read()
   ls = len(s.split())
   if ls != 2 :

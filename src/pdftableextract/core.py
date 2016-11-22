@@ -314,7 +314,7 @@ def process_page(infile, pgs,
               stdout=subprocess.PIPE, 
               shell=True )
     
-    ret = p.communicate()[0]
+    ret = p.communicate()[0].decode("UTF-8")
     if whitespace != 'raw' :
       ret = whitespaceRe.sub( "" if whitespace == "none" else " ", ret )
       if len(ret) > 0 :
