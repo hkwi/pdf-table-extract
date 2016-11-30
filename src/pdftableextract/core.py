@@ -207,7 +207,7 @@ def process_page(infile, pgs,
   maxdiv=10
   i=0
 
-  while i < len(vd) :
+  while i < len(vd) and len(vd) > 1:
     if vd[i+1]-vd[i] > maxdiv :
       vd = delete(vd,i)
       vd = delete(vd,i)
@@ -215,7 +215,7 @@ def process_page(infile, pgs,
       i=i+2
   
   j = 0 
-  while j < len(hd):
+  while j < len(hd) and len(hd) > 1:
     if hd[j+1]-hd[j] > maxdiv :
       hd = delete(hd,j)
       hd = delete(hd,j)
