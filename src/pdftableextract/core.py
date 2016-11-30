@@ -476,6 +476,7 @@ def o_table_html(cells,pgs, outfile=None, output_type=None, name=None, infile=No
       td.setAttribute("style", "background-color: #%02x%02x%02x" %
             tuple(128+col(k/(nc+0.))))
     tr.appendChild(td)
-  root.appendChild(tr)
+  if tr:
+    root.appendChild(tr)
   outfile.write( doc.toprettyxml() )
   
